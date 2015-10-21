@@ -1,0 +1,44 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Yeah, it's about me -->
+    <title>Angus MacDonald</title>
+
+    <!-- Get that style -->
+    <!-- Specifically, strap those boots -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+
+</head>
+<body ng-controller="PortfolioController" data-dump="{{ data_for_angular }}">
+
+    <!-- Setup the main container -->
+    <div class="the-main-box light-bg-1">
+        <div class="header dark-bg-1 col-lg-12">
+            <h1 class="header-title">ANGUS MACDONALD</h1>
+        </div>
+
+        <div class="navigation">
+            <div class="page-selector col-xs-4" ng-repeat="page in getMenuPages()">
+                <span class="page-selector-title" ng-click="loadPage(page)" ng-bind="page.name"></span>
+            </div>
+        </div>
+
+        <div class="pages-container">
+            <div class="pages">
+                <div class="portfolio-page" ng-repeat="page in pages" ng-class="page.domClass" ng-include="page.template"></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script type="text/javascript" data-main="{% static 'js/main.js' %}" src="{% static 'js/externals/require.js' %}"></script>
+</html>

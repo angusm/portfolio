@@ -1,0 +1,291 @@
+@import 'hover-effects';
+@import 'cross-browser';
+@import 'handy-dandies';
+@import 'flow-type';
+
+/**
+ * Constants
+ */
+$light-color-1: #FFF;
+$dark-color-1: #000;
+$golden-ratio: 1.61803398875;
+
+/**
+ * Sweeping declarations
+ */
+body {
+  * {
+    position: relative;
+  }
+}
+
+/**
+ * Re Used classes
+ */
+.light-bg-1 {
+  background-color: $light-color-1;
+  color: $dark-color-1;
+}
+
+.dark-bg-1 {
+  background-color: $dark-color-1;
+  color: $light-color-1;
+}
+
+/**
+ * Arrow classes
+ */
+.arrow-test {
+  background: url('/static/images/arrows/1.png');
+}
+
+/**
+ * Icon classes
+ */
+.icon-test {
+  background: url('/static/images/icons/1.png');
+}
+
+/**
+ * Line classes
+ */
+.line-test {
+  background: url('/static/images/lines/1.png');
+}
+
+/**
+ * One offs
+ */
+.the-main-box {
+
+  // Page Header
+  .header {
+    .header-title {
+      margin: 0;
+      padding: 0;
+      vertical-align: bottom;
+      width: 100%;
+    }
+  }
+
+  // Floating Die
+  $floatingDieScale: 10%;
+  $floatingDieRight: 1%;
+  .floating-die {
+    background-image: url('/static/images/die/die.png');
+    background-size: 100% 100%;
+    width: $floatingDieScale;
+    padding-top: $floatingDieScale;
+
+    position: absolute;
+    right: $floatingDieRight;
+    margin-top: 6%;
+    z-index: 200;
+
+    // Set the pointer
+    @include hover-hand();
+
+    // Setup the transform
+    @include transition-duration(0.15s);
+    @include transition-property(all);
+    @include transition-timing-function(linear);
+
+    // Set the hover effect
+    &:hover {
+      @include transform(rotate(10deg));
+    }
+
+  }
+
+  // Navigation
+  .navigation {
+    width: 100% - ($floatingDieRight * 2) - $floatingDieScale;
+
+    .page-selector {
+      text-align: center;
+
+      .page-selector-title {
+        @include hover-hand();
+      }
+    }
+  }
+
+  // Pages
+  $pageCount: 4;
+  $desiredMargin: 0.015;
+  $pagePadding: $desiredMargin / $pageCount;
+  
+  $projectMargin: $desiredMargin / (1 - $desiredMargin);
+  $projectWidth: (1/3);
+
+  .pages-container {
+
+    width: 100%;
+    overflow: hidden;
+
+    .pages {
+
+      width: $pageCount * 100%;
+
+      // All pages
+      .portfolio-page {
+        width: 25%;
+        height: 0;
+        padding-left: percentage($pagePadding);
+        padding-top: percentage($pagePadding);
+        float: left;
+
+        &.visible-portfolio-page {
+          height: auto;
+        }
+      }
+
+      // About me
+      .about-me {
+
+      }
+
+      // Experience
+      .work-experience {
+        .work-experience-content {}
+      }
+
+      // Project Selection
+      .project-selection {
+        $projectNameLineFontSize: 4;
+
+        .project-summary-container {
+          display: inline-block;
+          padding-right: percentage($projectMargin);
+          padding-bottom: percentage($projectMargin);
+          width: percentage($projectWidth);
+
+          @include hover-hand();
+
+          &:hover {
+            $hoverGrowth: 0.01;
+            margin: percentage(-$hoverGrowth);
+            width: percentage($projectWidth + (2 * $hoverGrowth));
+            z-index: 999;
+
+            .project-summary-border {
+              .project-summary {
+                .project-summary-right {
+                  .project-name-line-container {
+                    .project-name-line {
+                      $hoverFont: $projectNameLineFontSize * (($projectWidth + (2 * $hoverGrowth)) / $projectWidth);
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          // Mystery margin bottom garbage
+          margin-bottom: -0.32%;
+
+          .project-summary-border {
+            $color: 56;
+            $borderColor: $color / 2;
+            padding: 2%;
+            background-color: rgb($color, $color, $color);
+            border: 1px solid rgb($borderColor, $borderColor, $borderColor);
+
+            @include drop-shadow(45deg, 5px, 1px, 1px, rgba(0, 0, 0, 0.25));
+
+            .project-summary {
+              width: 100%;
+              border: 1px solid rgb($borderColor, $borderColor, $borderColor);
+
+              position: relative;
+              padding-top: 100% / $golden-ratio;
+
+              .project-summary-left {
+                width: 100% - (100% / $golden-ratio);
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                .project-icon {
+                  display: block;
+                  width: 100%;
+                  padding-top: 100%;
+                  background-size: 100% 100%;
+                }
+                .project-arrow {
+                  display: block;
+                  width: 100%;
+                  padding-top: (100% / $golden-ratio);
+                  background-size: 100% 100%;
+                }
+              }
+              .project-summary-right {
+                width: (100% / $golden-ratio);
+
+                position: absolute;
+                top: 0;
+                left: 38.2%;
+
+                // Contains one line of the project title
+                .project-name-line-container {
+                  display: block;
+                  width: 100%;
+                  height: 0;
+                  padding-top: 12.5%;
+                  padding-bottom: 12.5%;
+                  background-size: 100% 100%;
+
+                  &:nth-child(odd) {
+                    background-color: #099;
+                  }
+
+                  // Setup the index layering for project title
+                  &:nth-child(1) {
+                    z-index: 99;
+                  }
+                  &:nth-child(2) {
+                    z-index: 98;
+                  }
+                  &:nth-child(3) {
+                    z-index: 97;
+                  }
+                  &:nth-child(4) {
+                    z-index: 96;
+                  }
+
+                  // Center the text in the middle of the container
+                  .project-name-line {
+                    margin-top: -16%;
+                    padding: 2%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .project-details {
+        .project-photo-image {
+          width: 100%;
+          padding-bottom: percentage($projectMargin);
+          padding-right: percentage($projectMargin)
+        }
+        .project-web-container {
+          padding-top: 125%;
+
+          .project-web-display {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            bottom: percentage($projectMargin);
+            right: percentage($projectMargin)
+          }
+        }
+      }
+
+    }
+  }
+
+}

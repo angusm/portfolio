@@ -1,0 +1,42 @@
+<div class="project-summary-container" ng-repeat="project in projects">
+    <div
+        class="project-summary-border"
+        ng-click="loadProject(project)"
+    >
+        <div class="project-summary">
+
+            <!-- Icon and arrow -->
+            <div class="project-summary-left">
+                <div class="project-icon" ng-class="project.projectStyle.iconClass"></div>
+                <div
+                    class="project-arrow"
+                    ng-class="project.projectStyle.arrowClass"
+                ></div>
+            </div>
+
+            <!-- Project lines -->
+            <div class="project-summary-right">
+                <div
+                    class="project-name-line-container"
+                    ng-class="project.projectStyle.lineClasses[lineNumber]"
+                    ng-repeat="lineNumber in project.getLineNumbers() | limitTo: 3"
+                >
+                    <div
+                        class="project-name-line"
+                        ng-bind="project.getIntermediateLine(lineNumber)"
+                    ></div>
+                </div>
+                <div
+                    class="project-name-line-container"
+                    ng-class="project.projectStyle.lineClasses[3]"
+                >
+                    <div
+                        class="project-name-line"
+                        ng-bind="project.getLastLine(3)"
+                    ></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

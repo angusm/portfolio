@@ -1,0 +1,44 @@
+@import 'trig';
+
+@mixin hover-hand() {
+  cursor: pointer;
+  cursor: hand;
+}
+
+@mixin transition-property($value) {
+  -webkit-transition-property: $value;
+  -moz-transition-property: $value;
+  -o-transition-property: $value;
+  transition-property: $value;
+}
+
+@mixin transition-duration($value) {
+  -webkit-transition-duration: $value;
+  -moz-transition-duration: $value;
+  -o-transition-duration: $value;
+  transition-duration: $value;
+}
+
+@mixin transition-timing-function($value) {
+  -webkit-transition-timing-function: $value;
+  -moz-transition-timing-function: $value;
+  -o-transition-timing-function: $value;
+  transition-timing-function: $value;
+}
+
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
+
+@mixin drop-shadow($angle, $distance, $blur, $spread, $shadow-color) {
+  $vertical-length: sin($angle) * $distance;
+  $horizontal-length: cos($angle) * $distance;
+
+  -webkit-box-shadow: $horizontal-length $vertical-length $blur $spread $shadow-color;
+  -moz-box-shadow: $horizontal-length $vertical-length $blur $spread $shadow-color;
+  box-shadow: $horizontal-length $vertical-length $blur $spread $shadow-color;
+}

@@ -1,0 +1,13 @@
+@mixin clear-it-up() {
+  padding: 0;
+  margin: 0;
+}
+
+@mixin fill-line-with-text() {
+  text-align: justify;
+  &:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+}
